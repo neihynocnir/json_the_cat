@@ -1,12 +1,12 @@
 const request = require('request');
 
-const breedFetcher = (breeds) => {
+const fetchBreedDescription = (breedName, callback) => {
   let baseUrl = 'https://api.thecatapi.com/v1/breeds/search?q=';
-  let url = baseUrl.concat('', breeds);
-  request(url, callback);
+  let url = baseUrl.concat('', breedName);
+  request(url, req);
 }
 
-callback = (error, response, body) => {
+const req = (error, response, body) => {
   if (error){
     console.log('url does not exist');
     return;
@@ -16,10 +16,7 @@ callback = (error, response, body) => {
     console.log('Breed does not exist');
     return;
   } 
-  console.log ((data[0].description))
+  console.log((data[0].description))
 }
 
-const args = process.argv;
-let breeds = (args.slice(2));
-breedFetcher(breeds);
-
+module.exports = { fetchBreedDescription };
